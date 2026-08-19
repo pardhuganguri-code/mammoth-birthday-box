@@ -1,24 +1,93 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import { PresentStep } from "@/components/PresentStep";
+import { gifts, HER_NAME } from "@/data/gifts";
+import mammoth from "@/assets/mammoth.png";
+import camel from "@/assets/camel.png";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: `Happy Birthday, ${HER_NAME}! 🎁` },
+      {
+        name: "description",
+        content: `Twelve wrapped presents, twelve photos and twelve notes — a cosy woolly mammoth and camel birthday surprise for ${HER_NAME}.`,
+      },
+      { property: "og:title", content: `Happy Birthday, ${HER_NAME}! 🎁` },
+      {
+        property: "og:description",
+        content: `Unwrap twelve little presents full of photos and notes for ${HER_NAME}.`,
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: BirthdayPage,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function BirthdayPage() {
+  const [step, setStep] = useState<number | null>(null);
+
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
+    <main className="relative min-h-screen overflow-hidden px-5 py-12">
       <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
+        src={mammoth}
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        width={768}
+        height={768}
+        className="pointer-events-none absolute -left-10 bottom-6 h-40 w-40 animate-float-soft object-contain opacity-40 sm:h-56 sm:w-56"
       />
-    </div>
+      <img
+        src={camel}
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        width={768}
+        height={768}
+        className="pointer-events-none absolute -right-8 top-24 h-36 w-36 animate-float-soft object-contain opacity-40 sm:h-52 sm:w-52"
+      />
+
+      <div className="relative mx-auto flex max-w-xl flex-col items-center">
+        {step === null ? (
+          <section className="flex flex-col items-center text-center">
+            <span className="rounded-full bg-card px-4 py-1 text-xs font-bold uppercase tracking-[0.3em] text-muted-foreground shadow-soft">
+              a tiny caravan of gifts
+            </span>
+            <h1 className="mt-6 text-5xl font-bold leading-tight text-foreground sm:text-6xl">
+              Happy Birthday,
+              <span className="block text-primary">{HER_NAME}</span>
+            </h1>
+            <p className="mt-4 max-w-sm text-base leading-relaxed text-muted-foreground">
+              There are {gifts.length} presents waiting. Open one, and the next one appears —
+              woolly mammoths and party camels included.
+            </p>
+            <img
+              src={camel}
+              alt="Cute camel wearing a party hat"
+              width={768}
+              height={768}
+              className="mt-8 h-48 w-48 animate-float-soft object-contain"
+            />
+            <button
+              onClick={() => setStep(0)}
+              className="mt-8 rounded-full ribbon-surface px-10 py-4 text-lg font-bold text-primary-foreground shadow-lift transition-transform duration-200 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/50"
+            >
+              Open the first present 🎁
+            </button>
+          </section>
+        ) : (
+          <PresentStep
+            key={step}
+            gift={gifts[step]!}
+            index={step}
+            total={gifts.length}
+            isLast={step === gifts.length - 1}
+            onNext={() => setStep(step === gifts.length - 1 ? null : step + 1)}
+          />
+        )}
+      </div>
+    </main>
   );
 }
