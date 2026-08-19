@@ -1,22 +1,22 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { PresentStep } from "@/components/PresentStep";
-import { gifts, HER_NAME } from "@/data/gifts";
+import { gifts, HER_NAME, HER_AGE } from "@/data/gifts";
 import mammoth from "@/assets/mammoth.png";
 import camel from "@/assets/camel.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: `Happy Birthday, ${HER_NAME}! 🎁` },
+      { title: `Happy ${HER_AGE}st Birthday, ${HER_NAME}! 🎁` },
       {
         name: "description",
-        content: `Twelve wrapped presents, twelve photos and twelve notes — a cosy woolly mammoth and camel birthday surprise for ${HER_NAME}.`,
+        content: `${HER_AGE} wrapped presents, photos and notes — a cosy woolly mammoth and camel ${HER_AGE}st birthday surprise for ${HER_NAME}.`,
       },
-      { property: "og:title", content: `Happy Birthday, ${HER_NAME}! 🎁` },
+      { property: "og:title", content: `Happy ${HER_AGE}st Birthday, ${HER_NAME}! 🎁` },
       {
         property: "og:description",
-        content: `Unwrap twelve little presents full of photos and notes for ${HER_NAME}.`,
+        content: `Unwrap ${HER_AGE} little presents for ${HER_NAME}'s ${HER_AGE}st birthday.`,
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -53,15 +53,25 @@ function BirthdayPage() {
         {step === null ? (
           <section className="flex flex-col items-center text-center">
             <span className="rounded-full bg-card px-4 py-1 text-xs font-bold uppercase tracking-[0.3em] text-muted-foreground shadow-soft">
-              a tiny caravan of gifts
+              a tiny caravan of {HER_AGE} gifts
             </span>
             <h1 className="mt-6 text-5xl font-bold leading-tight text-foreground sm:text-6xl">
-              Happy Birthday,
+              Happy {HER_AGE}st Birthday,
               <span className="block text-primary">{HER_NAME}</span>
             </h1>
+            <p className="mt-4 flex items-baseline justify-center gap-3">
+              <span className="font-display text-7xl font-bold text-primary sm:text-8xl">
+                {HER_AGE}
+              </span>
+              <span className="text-sm font-bold uppercase tracking-[0.3em] text-muted-foreground">
+                years
+                <br />
+                of you
+              </span>
+            </p>
             <p className="mt-4 max-w-sm text-base leading-relaxed text-muted-foreground">
-              There are {gifts.length} presents waiting. Open one, and the next one appears —
-              woolly mammoths and party camels included.
+              {gifts.length} presents waiting — one for every year. Open one, and the next one
+              appears: woolly mammoths and party camels included.
             </p>
             <img
               src={camel}
@@ -76,6 +86,26 @@ function BirthdayPage() {
             >
               Open the first present 🎁
             </button>
+            <nav className="mt-8 flex flex-wrap justify-center gap-3">
+              <Link
+                to="/twenty-one"
+                className="rounded-full bg-card px-5 py-2 text-sm font-bold text-card-foreground shadow-soft"
+              >
+                21 things about you ✨
+              </Link>
+              <Link
+                to="/wishes"
+                className="rounded-full bg-card px-5 py-2 text-sm font-bold text-card-foreground shadow-soft"
+              >
+                Birthday letter 💌
+              </Link>
+              <Link
+                to="/gallery"
+                className="rounded-full bg-card px-5 py-2 text-sm font-bold text-card-foreground shadow-soft"
+              >
+                Photo caravan 📸
+              </Link>
+            </nav>
           </section>
         ) : (
           <PresentStep
