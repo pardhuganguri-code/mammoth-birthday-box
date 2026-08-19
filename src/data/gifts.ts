@@ -1,3 +1,13 @@
+import j1 from "@/assets/jasmine-1.jpeg.asset.json";
+import j2 from "@/assets/jasmine-2.jpeg.asset.json";
+import j3 from "@/assets/jasmine-3.jpeg.asset.json";
+import j4 from "@/assets/jasmine-4.jpeg.asset.json";
+import j5 from "@/assets/jasmine-5.jpeg.asset.json";
+import j6 from "@/assets/jasmine-6.jpeg.asset.json";
+import j7 from "@/assets/jasmine-7.jpeg.asset.json";
+import j8 from "@/assets/jasmine-8.jpeg.asset.json";
+import j9 from "@/assets/jasmine-9.jpeg.asset.json";
+
 export type Gift = {
   /** Ribbon label on the wrapped present */
   tag: string;
@@ -5,12 +15,7 @@ export type Gift = {
   title: string;
   /** Custom note for this photo */
   note: string;
-  /**
-   * Drop her photo in `src/assets/` and import it here, e.g.
-   *   import jasmine1 from "@/assets/jasmine-1.jpg";
-   *   photo: jasmine1,
-   * Leave as null to show the cute mammoth/camel placeholder frame.
-   */
+  /** Photo URL, or null for the mammoth/camel placeholder frame */
   photo: string | null;
 };
 
@@ -20,73 +25,55 @@ export const gifts: Gift[] = [
   {
     tag: "No. 1",
     title: "Happy birthday, Jasmine!",
-    note: "Twelve little presents, one for every reason you make the herd better.",
-    photo: null,
+    note: "Nine little presents, one for every reason you make the herd better.",
+    photo: j8.url,
   },
   {
     tag: "No. 2",
-    title: "That smile",
-    note: "Certified warmer than a woolly coat in a snowstorm.",
-    photo: null,
+    title: "That flower-holding softness",
+    note: "Only you could hold one tiny flower and make the whole evening feel gentler.",
+    photo: j1.url,
   },
   {
     tag: "No. 3",
-    title: "Desert wanderer",
-    note: "You could cross a whole dune sea and still find a reason to laugh halfway.",
-    photo: null,
+    title: "Golden hour glance",
+    note: "Certified main character energy, and you weren't even trying.",
+    photo: j2.url,
   },
   {
     tag: "No. 4",
-    title: "Cosiest human alive",
-    note: "Being around you feels like wool socks and warm chai at the same time.",
-    photo: null,
+    title: "The tiniest gift",
+    note: "You notice small beautiful things nobody else stops for. Never lose that.",
+    photo: j3.url,
   },
   {
     tag: "No. 5",
-    title: "Our best mischief",
-    note: "Half our stories start with you saying: okay hear me out.",
-    photo: null,
+    title: "Off in your own world",
+    note: "Phone in hand, plotting something wonderful. As always.",
+    photo: j4.url,
   },
   {
     tag: "No. 6",
-    title: "Snack partner for life",
-    note: "Two humps worth of snacks and you'd still share the last bite.",
-    photo: null,
+    title: "Research park legend",
+    note: "Lanyard on, camel keychain swinging, ready to conquer the day.",
+    photo: j5.url,
   },
   {
     tag: "No. 7",
     title: "Loudest cheerleader",
-    note: "You believe in people before they believe in themselves. Wild superpower.",
-    photo: null,
+    note: "Hand in the air, mouth wide open — the best kind of chaos in every group photo.",
+    photo: j6.url,
   },
   {
     tag: "No. 8",
-    title: "Softest heart",
-    note: "Big mammoth energy: gentle giant, tiny tusks, huge feelings.",
-    photo: null,
+    title: "Full pose mode",
+    note: "Effortlessly cool, absurdly cute, and absolutely aware of it.",
+    photo: j7.url,
   },
   {
     tag: "No. 9",
-    title: "Chaos, but make it cute",
-    note: "Never once boring. Not for a single day of knowing you.",
-    photo: null,
-  },
-  {
-    tag: "No. 10",
-    title: "Through every season",
-    note: "Ice ages and heatwaves, you're the constant in the story.",
-    photo: null,
-  },
-  {
-    tag: "No. 11",
-    title: "This year on you",
-    note: "May it be full of sunlight, soft landings and absurdly good news.",
-    photo: null,
-  },
-  {
-    tag: "No. 12",
     title: "One last wish",
     note: "Happy birthday, Jasmine. Go be the whole caravan's favourite person again.",
-    photo: null,
+    photo: j9.url,
   },
 ];
